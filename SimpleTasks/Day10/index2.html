@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cat Facts</title>
+</head>
+<body>
+    <h2>New Cat Fact:</h2>
+    <div id="ts"></div>
+
+    <h3>All Stored Facts:</h3>
+    <ul id="list"></ul>
+
+    <script>
+
+
+        var stored = localStorage.getItem("facts");
+        var allFacts = [];
+
+        if (stored) {
+            allFacts = JSON.parse(stored);
+            for (var i = 0; i < allFacts.length; i++) {
+                var li = document.createElement("li");
+                li.innerText = allFacts[i];
+                document.getElementById("list").appendChild(li);
+            }
+        }
+
+        var xmlhttp = new XMLHttpRequest();
+
+
+        xmlhttp.open("GET", "https://catfact.ninja/fact", true);
+        xmlhttp.send();
+
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var response = JSON.parse(xmlhttp.responseText);
+                var fact = response.fact;
+
+                document.getElementById("ts").innerText = fact;
+
+                allFacts.push(fact);
+                localStorage.setItem("facts", JSON.stringify(allFacts));
+
+                var li = document.createElement("li");
+                li.innerText = fact;
+                document.getElementById("list").appendChild(li);
+            }
+        };
+
+    
+    </script>
+</body>
+</html>

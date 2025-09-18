@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <style>
+    .error {
+      color: red;
+      display: none;
+      margin-left: 10px;
+    }
+
+    input:invalid {
+      background-color: gray;
+    }
+
+    input:valid {
+      background-color: white;
+    }
+
+    .validation-img {
+      width: 20px;
+      vertical-align: middle;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Register</h2>
+
+  <form id="registerForm" action="thankyou.html" method="GET">
+    <label>
+      Full Name:
+      <input type="text" id="fullName" name="fullName" placeholder="Enter your Name:" required>
+      <span class="error" id="nameError">Invalid name</span>
+      <img src="notvalid.png" id="nameNotValidImg" class="validation-img">
+      <img src="valid.png" id="nameValidImg" class="validation-img">
+    </label><br><br>
+
+    <label>
+      Email:
+      <input type="email" id="email" name="email" required>
+    </label><br><br>
+
+    <label>
+      City:
+      <select id="city" name="city" required>
+        <option value="">Select city</option>
+        <option>Cairo</option>
+        <option>Giza</option>
+        <option>Alexandria</option>
+      </select>
+    </label><br><br>
+
+    <label>
+      Password:
+      <input type="password" id="password" name="password" required>
+    </label><br><br>
+
+    <label>
+      Repeat Password:
+      <input type="password" id="repeatPassword" name="repeatPassword" required>
+      <span class="error" id="passError">Password and repeat password should be the same</span>
+    </label><br><br>
+
+    <label>
+      <input type="checkbox" id="terms" required>
+      I accept the terms and conditions
+    </label><br><br>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("registerForm");
+    const fullName = document.getElementById("fullName");
+    const nameError = document.getElementById("nameError");
+    const nameValidImg = document.getElementById("nameValidImg");
+    const nameNotValidImg = document.getElementById("nameNotValidImg");
+    const password = document.getElementById("password");
+    const repeatPassword = document.getElementById("repeatPassword");
+    const passError = document.getElementById("passError");
+
+    fullName.addEventListener("focus", () => {
+      fullName.style.border = "solid 1px blue";
+    });
+
+    fullName.addEventListener("blur", () => {
+      fullName.style.border = "";
+      const value = fullName.value.trim();
+
+      if (value.length <= 3) {
+        nameError.style.display = "inline";
+        nameNotValidImg.style.display = "inline";
+        nameValidImg.style.display = "none";
+        fullName.focus();
+        fullName.select();
+      } else {
+        nameError.style.display = "none";
+        nameNotValidImg.style.display = "none";
+        nameValidImg.style.display = "inline";
+      }
+    });
+
+    // Password validation
+    repeatPassword.addEventListener("blur", () => {
+      if (password.value !== repeatPassword.value) {
+        passError.style.display = "inline";
+        repeatPassword.style.backgroundColor = "gray";
+      } else {
+        passError.style.display = "none";
+        repeatPassword.style.backgroundColor = "white";
+      }
+    });
+
+    form.addEventListener("submit", function (e) {
+      let nameValid = fullName.value.trim().length > 3;
+      let passwordsMatch = password.value === repeatPassword.value;
+
+      if (!nameValid || !passwordsMatch) {
+        e.preventDefault();
+        alert("Plz correct the validation errors first.");
+      } else {
+        this.action = "thankyou.html?name=" + encodeURIComponent(fullName.value.trim());
+      }
+    });
+  </script>
+
+</body>
+</html>

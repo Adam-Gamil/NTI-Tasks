@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple HTML Page</title>
+    <script src="ft.js"></script>
+
+    <style>
+        .logo {
+            margin-top: 100px;
+            font-size: 100px;
+            font-weight: bold;
+            color: black;
+            text-align: center;
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+
+        <!-- <h1>page 1</h1>
+        <button onclick="goToNextPage(1)">Forward</button> -->
+
+
+        <!-- <img src="pic1.png" width="500" height="500"> -->
+
+    
+        <input type="text" placeholder="Enter your name" id="nameInput">
+
+        <button onclick="displayLogo()">display design</button>
+
+
+        <div id="logoContainer">
+            
+        </div>
+
+
+</body>
+
+<script>
+    function displayLogo() {
+
+        const name = document.getElementById('nameInput').value;
+        let firstLetter = name.charAt(0)
+        let secondLetter;
+        for (let i = 0; i < name.length; i++) {
+            if(name[i] == " "){
+                secondLetter = name.charAt(i + 1);
+            }
+        }
+
+        logoContainer = document.getElementById('logoContainer');
+
+        let word = firstLetter + secondLetter;
+
+        logoContainer.innerHTML = `<div class="logo">${word}</div>`;
+    }
+</script>
+</html>

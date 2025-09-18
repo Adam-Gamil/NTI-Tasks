@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You</title>
+</head>
+<body>
+  <h2 id="msg"></h2>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get("name") || "User";
+    document.getElementById("msg").innerText = `Thank you, ${name} for registering in our website`;
+  </script>
+</body>
+</html>

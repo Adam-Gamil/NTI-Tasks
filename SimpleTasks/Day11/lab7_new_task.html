@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX with XMLHttpRequest</title>
+  <style>
+    img {
+      width: 100px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .user-info {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Old-School AJAX (XMLHttpRequest)</h2>
+
+  <label>
+    Enter User ID:
+    <input type="number" id="userIdInput" min="1">
+    <button onclick="fetchUserById()">Display</button>
+  </label>
+
+  <div class="user-info" id="userInfoA"></div>
+
+  <hr>
+
+  <label>
+    Select User:
+    <select id="userDropdown" onchange="displaySelectedUser()">
+      <option value="">-- Choose a user --</option>
+    </select>
+  </label>
+
+  <div class="user-info" id="userInfoB"></div>
+
+  <script>
+    const userInfoA = document.getElementById("userInfoA");
+    const userInfoB = document.getElementById("userInfoB");
+    const userDropdown = document.getElementById("userDropdown");
+
+    function fetchUserById() {
+      const id = document.getElementById("userIdInput").value;
+      if (!id) return;
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", `https://reqres.in/api/users/${id}`, true);
+
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          const data = JSON.parse(xhr.responseText);
+          const user = data.data;
+
+          userInfoA.innerHTML = `
+            <h3>User Info</h3>
+            <p><strong>First Name:</strong> ${user.first_name}</p>
+            <p><strong>Last Name:</strong> ${user.last_name}</p>
+            <img src="${user.avatar}" alt="Avatar">
+          `;
+        } else {
+          userInfoA.innerHTML = `<p style="color:red">User not found</p>`;
+        }
+      };
+
+      xhr.send();
+    }
+
+    function fetchAllUsers() {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://reqres.in/api/users?page=1", true);
+
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          const data = JSON.parse(xhr.responseText);
+          const users = data.data;
+
+          users.forEach(user => {
+            const option = document.createElement("option");
+            option.value = user.id;
+            option.textContent = `${user.first_name} ${user.last_name}`;
+            userDropdown.appendChild(option);
+          });
+        }
+      };
+
+      xhr.send();
+    }
+
+    function displaySelectedUser() {
+      const id = userDropdown.value;
+      if (!id) return;
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", `https://reqres.in/api/users/${id}`, true);
+
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          const data = JSON.parse(xhr.responseText);
+          const user = data.data;
+
+          userInfoB.innerHTML = `
+            <h3>Selected User</h3>
+            <p><strong>First Name:</strong> ${user.first_name}</p>
+            <p><strong>Last Name:</strong> ${user.last_name}</p>
+            <img src="${user.avatar}" alt="Avatar">
+          `;
+        }
+      };
+
+      xhr.send();
+    }
+
+    // Load users into dropdown on page load
+    window.onload = fetchAllUsers;
+  </script>
+</body>
+</html>

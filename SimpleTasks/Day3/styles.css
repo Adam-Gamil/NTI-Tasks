@@ -1,0 +1,29 @@
+h1{
+    color: red;
+    background-color: blue;
+}
+
+.ts1{
+    font-size: 20px;
+}
+
+div.ts1{
+    font-size: 35px;
+}
+
+div.div.ts1{
+    font-size: 40px;
+}
+
+#ts3{
+    color: hotpink;
+    background-color: yellow;
+    font-size: 80px;
+}
+
+
+#ts2 .ts1{
+    color: green;
+    font-size: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
