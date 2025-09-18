@@ -23,6 +23,9 @@ This project involved creating a fully responsive clone of a professional develo
 
 **Technologies Used:** HTML5, CSS3, JavaScript, Bootstrap
 
+Here are some screenshots of the cloned portfolio:
+<img width="1902" height="839" alt="Screenshot 2025-09-19 021243" src="https://github.com/user-attachments/assets/738e96a4-dbe7-4bc9-b4b2-c3f704fd88ba" />
+<img width="1900" height="748" alt="Screenshot 2025-09-19 021327" src="https://github.com/user-attachments/assets/f38193bb-c118-4073-8dce-121a5b6c28d2" />
 
 
 ### 2. YouTube Homepage Clone
@@ -30,6 +33,8 @@ This task focused on replicating the visual layout and structure of the YouTube 
 
 **Technologies Used:** HTML5, CSS3, Google Fonts (for icons)
 
+Here's a look at the YouTube homepage clone:
+<img width="1883" height="935" alt="Screenshot 2025-09-19 021403" src="https://github.com/user-attachments/assets/ff2fdcf1-0fa4-4ec7-8ded-ea681df715f7" />
 
 ### 3. Website Page Clones
 These two projects involved cloning static pages from existing websites. The main objective was to practice implementing responsive layouts using the Bootstrap framework to ensure the pages looked great on all device sizes.
